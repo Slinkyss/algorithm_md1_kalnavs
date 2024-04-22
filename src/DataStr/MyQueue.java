@@ -2,9 +2,9 @@ package DataStr;
 
 public class MyQueue<ttype> {
 
-    private MyNodeQ<ttype> frontNode;
-    private MyNodeQ<ttype> rearNode;
-    private int length;
+    protected MyNodeQ<ttype> frontNode;
+    protected MyNodeQ<ttype> rearNode;
+    protected int length;
 
     public MyQueue() {
         frontNode = null;
@@ -40,24 +40,24 @@ public class MyQueue<ttype> {
             frontNode = newNode;
         } else{
             rearNode.setNext(newNode);
+            newNode.setPrev(rearNode);
         }
         rearNode = newNode;
         length++;
     }
 
-    public ttype dequeue() throws Exception {
+    public void dequeue() throws Exception {
         if(isEmpty()){
             throw new Exception("Queue is empty");
         }
 
-        ttype front = frontNode.getElement();
         frontNode = frontNode.getNext();
 
         if(frontNode == null){
             rearNode = null;
         }
         length--;
-        return front;
+        System.gc();
     }
 
     public void print()throws Exception{
