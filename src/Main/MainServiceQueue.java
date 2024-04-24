@@ -57,14 +57,14 @@ public class MainServiceQueue {
             System.out.println(e);
         }
         try{
-            numberSimulation(11);
+            numberSimulation(1);
         }catch (Exception e){
             System.out.println(e);
         }
 
         try{
-            //nestrada nezinu kapec, skatijos interneta tutorialus, nesanaca :(
-            //callFunction("f1","f2","f3");
+
+            callFunction("f1","f2","f3");
         }catch (Exception e){
             System.out.println(e);
         }
@@ -147,13 +147,13 @@ public class MainServiceQueue {
     }
 
 
-    public int f1() {
+    public static int f1() {
         return 1;
     }
-    public int f2() {
+    public static int f2() {
         return 2;
     }
-    public int f3() {
+    public static int f3() {
         return 3;
     }
 
@@ -166,12 +166,12 @@ public class MainServiceQueue {
 
 
 
-        //nestrada nezinu kapec, skatijos interneta tutorialus, nesanaca :(
+
         for(int i = 0; i < 3; i++){
             String temp = functionName.dequeue();
             Method method = MainServiceQueue.class.getDeclaredMethod(temp);
-            Object test = method.invoke(null);
-            System.out.println(test);
+
+            System.out.println( method.invoke(null));
         }
 
     }
