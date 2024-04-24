@@ -57,13 +57,15 @@ public class MainServiceQueue {
             System.out.println(e);
         }
         try{
-            numberSimulation(1);
+            //stunda pieminejat, ka nevarat ar 2 for cikliem, tapec partaisiju, lidz galam nesanaca, nesaprotu kapec otrais thread nepalaizas.
+            numberSimulation(3);
         }catch (Exception e){
             System.out.println(e);
         }
 
         try{
 
+            System.out.println("----Call function-------");
             callFunction("f1","f2","f3");
         }catch (Exception e){
             System.out.println(e);
@@ -87,7 +89,7 @@ public class MainServiceQueue {
                     numbers.enqueue(number);
                     int start = LocalDateTime.now().getMinute();
                     System.out.println("Number " + number + " has been added to the queue at this time in minutes: " + start);
-                    Thread.sleep(random.nextInt(3000));
+                    Thread.sleep(random.nextInt(1500));
                     count--;
                 } catch (Exception e) {
                     System.out.println(e);
@@ -126,7 +128,7 @@ public class MainServiceQueue {
         }
         int start = LocalDateTime.now().getMinute();
         String number = numbers.dequeue();
-        Thread.sleep(random.nextInt(5000));
+        Thread.sleep(random.nextInt(2000));
         System.out.println("Number removed from the queue: " + number + " at this time in minutes: " + start);
 
 
