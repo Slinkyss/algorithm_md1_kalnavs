@@ -46,18 +46,20 @@ public class MyQueue<ttype> {
         length++;
     }
 
-    public void dequeue() throws Exception {
+    public ttype dequeue() throws Exception {
         if(isEmpty()){
             throw new Exception("Queue is empty");
         }
 
+        ttype temp = frontNode.getElement();
         frontNode = frontNode.getNext();
 
         if(frontNode == null){
             rearNode = null;
         }
         length--;
-        System.gc();
+        return temp;
+
     }
 
     public void print()throws Exception{

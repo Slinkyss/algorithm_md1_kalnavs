@@ -7,7 +7,12 @@ public class MyNodeQ<Ttype> {
     private MyNodeQ<Ttype> prev;
 
     public MyNodeQ(Ttype element) {
-        this.element = element;
+        if(element != null){
+            this.element = element;
+        }else{
+            this.element = (Ttype)new Object();
+        }
+
     }
 
     public Ttype getElement() {
@@ -15,7 +20,11 @@ public class MyNodeQ<Ttype> {
     }
 
     public void setElement(Ttype element) {
-        this.element = element;
+        if(element != null){
+            this.element = element;
+        }else{
+            this.element = (Ttype)new Object();
+        }
     }
 
     public MyNodeQ<Ttype> getNext() {

@@ -6,7 +6,11 @@ public class MyNodeStack<Ttype>{
     private MyNodeStack<Ttype> next;
 
     public MyNodeStack(Ttype element) {
-        this.element = element;
+        if(element == null){
+            this.element = (Ttype)new Object();
+        }else{
+            this.element = element;
+        }
     }
 
     public Ttype getElement() {
@@ -14,7 +18,11 @@ public class MyNodeStack<Ttype>{
     }
 
     public void setElement(Ttype element) {
-        this.element = element;
+        if(element != null){
+            this.element = element;
+        }else{
+            this.element = (Ttype)new Object();
+        }
     }
 
     public MyNodeStack<Ttype> getNext() {

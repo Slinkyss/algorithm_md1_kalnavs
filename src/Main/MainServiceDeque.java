@@ -4,6 +4,8 @@ import DataStr.MyDeque;
 import DataStr.Mystackk;
 import Student.Student;
 
+import java.util.Scanner;
+
 public class MainServiceDeque {
     public static void main(String[] args) {
 
@@ -65,11 +67,63 @@ public class MainServiceDeque {
             myStudentD.isEmpty();
 
 
+
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        try{
+            urlSimulation();
         }catch (Exception e){
             System.out.println(e);
         }
 
     }
+
+    public static void urlSimulation()throws Exception{
+        MyDeque<String> urlDeque = new MyDeque<>();
+        Scanner urlInput = new Scanner(System.in);
+
+        boolean start = true;
+
+
+        while(start) {
+
+            System.out.println("Enter Url: ");
+            String url = urlInput.nextLine();
+
+
+            if (url != null && url.matches(("(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})"))){
+                urlDeque.insertFront(url);
+            } else if (url.matches("1")) {
+                String x = urlDeque.removeRear();
+                System.out.println("Url - " + x + " - has been removed");
+            }else{
+                System.out.println("Invalid Url");
+            }
+
+            if(urlDeque.HowManyElements() == 10){
+                String x = urlDeque.removeRear();
+                System.out.println("Url - " + x + " - has been removed");
+
+
+            }
+
+            if(url.matches("stop")){
+                start = false;
+
+            }
+
+
+
+        }
+
+
+
+    }
+
+
 
 
 

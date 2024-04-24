@@ -3,7 +3,12 @@ package Main;
 import DataStr.MyQueue;
 import Student.Student;
 
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.util.Random;
+
 public class MainServiceQueue {
+
     public static void main(String[] args) {
         MyQueue<Integer> myIntegerQ = new MyQueue<>();
         MyQueue<Student> myStudentQ = new MyQueue<>();
@@ -50,6 +55,123 @@ public class MainServiceQueue {
             myStudentQ.print();
         }catch (Exception e){
             System.out.println(e);
+        }
+        try{
+            numberSimulation(11);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        try{
+            //nestrada nezinu kapec, skatijos interneta tutorialus, nesanaca :(
+            //callFunction("f1","f2","f3");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
+
+    public static void numberSimulation(int numberCount) throws Exception {
+        Random random = new Random();
+
+        MyQueue<String> numbers = new MyQueue<>();
+
+
+        //stunda pieminejat, ka nevarat ar 2 for cikliem, tapec partaisiju, lidz galam nesanaca, nesaprotu kapec otrais thread nepalaizas.
+
+        Thread addThread = new Thread(() -> {
+            int count = numberCount;
+            while (count > 0) {
+                try {
+                    String number = numberCreator();
+                    numbers.enqueue(number);
+                    int start = LocalDateTime.now().getMinute();
+                    System.out.println("Number " + number + " has been added to the queue at this time in minutes: " + start);
+                    Thread.sleep(random.nextInt(3000));
+                    count--;
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+        });
+
+
+        Thread removeThread = new Thread(() -> {
+            while (!numbers.isEmpty()) {
+                try {
+                  numberRemover(numbers,numberCount);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+        });
+
+        addThread.start();
+        removeThread.start();
+
+
+        addThread.join();
+        removeThread.join();
+
+    }
+
+
+
+
+
+    public static void numberRemover( MyQueue<String> numbers,int numberCount) throws Exception {
+        Random random = new Random();
+        if(numbers.isEmpty()){
+            throw new Exception("Empty queue");
+        }
+        int start = LocalDateTime.now().getMinute();
+        String number = numbers.dequeue();
+        Thread.sleep(random.nextInt(5000));
+        System.out.println("Number removed from the queue: " + number + " at this time in minutes: " + start);
+
+
+
+    }
+
+    public static String numberCreator() throws Exception {
+
+        Random random = new Random();
+
+            int x = random.nextInt(900) + 100;
+            int b = random.nextInt(900) + 100;
+            int c = random.nextInt(90) + 10;
+            String number = "+371 " + x + "-" + b + "-" + c;
+            Thread.sleep(random.nextInt(3000));
+
+            return number;
+    }
+
+
+    public int f1() {
+        return 1;
+    }
+    public int f2() {
+        return 2;
+    }
+    public int f3() {
+        return 3;
+    }
+
+    public static void callFunction(String name1, String name2, String name3) throws Exception {
+        MyQueue<String> functionName = new MyQueue<>();
+
+        functionName.enqueue(name1);
+        functionName.enqueue(name2);
+        functionName.enqueue(name3);
+
+
+
+        //nestrada nezinu kapec, skatijos interneta tutorialus, nesanaca :(
+        for(int i = 0; i < 3; i++){
+            String temp = functionName.dequeue();
+            Method method = MainServiceQueue.class.getDeclaredMethod(temp);
+            Object test = method.invoke(null);
+            System.out.println(test);
         }
 
     }

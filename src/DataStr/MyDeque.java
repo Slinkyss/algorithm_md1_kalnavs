@@ -21,6 +21,9 @@ public class MyDeque<Ttype> extends MyQueue<Ttype>{
     }
 
     public void insertRear(Ttype element)throws Exception{
+        if(element==null){
+            throw new Exception("Element input is wrong");
+        }
         enqueue(element);
     }
 
@@ -28,20 +31,21 @@ public class MyDeque<Ttype> extends MyQueue<Ttype>{
         dequeue();
     }
 
-    public void removeRear()throws Exception{
+    public  Ttype removeRear()throws Exception{
 
         if(isEmpty()){
                 throw new Exception("Queue is empty");
         }
 
         rearNode = rearNode.getPrev();
+        Ttype temp = rearNode.getElement();
         if(rearNode==null){
             frontNode = null;
         } else{
             rearNode.setNext(null);
         }
         length--;
-        System.gc();
+        return temp;
     }
 
     public void printReverse()throws Exception{
